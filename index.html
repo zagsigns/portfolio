@@ -1,146 +1,794 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
-    body {
-      scroll-behavior: smooth;
-    }
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("https://picsum.photos/1920/1080?blur=3") no-repeat center center/cover;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: bold;
-    }
-    .hero p {
-      font-size: 1.25rem;
-    }
-    .navbar {
-      background: #212529;
-    }
-    .portfolio img {
-      transition: transform 0.3s ease;
-      border-radius: 10px;
-    }
-    .portfolio img:hover {
-      transform: scale(1.05);
-    }
-    footer {
-      background: #212529;
-      color: white;
-      padding: 20px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Professional Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #ff6584;
+            --accent1: #42e2b8;
+            --accent2: #2c8cff;
+            --accent3: #ffb347;
+            --dark: #2d2b55;
+            --light: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%);
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        
+        /* Section General */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .section-title.center:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* About */
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Portfolio */
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-img {
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(108, 99, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        /* Services */
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(to right, #f5f5f5, #e9ecef);
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 1rem;
+        }
+        
+        .testimonial-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+        }
+        
+        /* Contact */
+        .contact-form .form-control {
+            padding: 1rem;
+            border: none;
+            background: #f5f5f5;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 10px;
+            height: 100%;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">MyPortfolio</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="container">
-    <h1>Hello, I'm John Doe</h1>
-    <p>A Passionate Web Developer & Designer</p>
-    <a href="#portfolio" class="btn btn-primary mt-3">View My Work</a>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about" class="py-5">
-  <div class="container text-center">
-    <h2 class="fw-bold mb-4">About Me</h2>
-    <p class="lead">I’m a full-stack web developer with a love for building modern, responsive, and user-friendly websites. Skilled in HTML, CSS, Bootstrap, JavaScript, and more. I enjoy solving problems and turning ideas into digital solutions.</p>
-  </div>
-</section>
-
-<!-- Portfolio -->
-<section id="portfolio" class="portfolio py-5 bg-light">
-  <div class="container">
-    <h2 class="fw-bold text-center mb-5">My Projects</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card shadow">
-          <img src="https://picsum.photos/400/300" class="card-img-top" alt="Project 1">
-          <div class="card-body">
-            <h5 class="card-title">Project One</h5>
-            <p class="card-text">A brief description of this awesome project.</p>
-            <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
-          </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(45, 43, 85, 0.9);">
+        <div class="container">
+            <a class="navbar-brand" href="#">YourName</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow">
-          <img src="https://picsum.photos/400/301" class="card-img-top" alt="Project 2">
-          <div class="card-body">
-            <h5 class="card-title">Project Two</h5>
-            <p class="card-text">An overview of this cool project.</p>
-            <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
-          </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-particles" id="particles"></div>
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h1>Hello, I'm <span style="color: var(--accent1)">Your Name</span></h1>
+                    <h2 class="mb-4">Web Developer & UI/UX Designer</h2>
+                    <p class="lead mb-4">I create beautiful, functional websites and applications with a focus on user experience and modern design principles.</p>
+                    <div class="d-flex">
+                        <a href="#portfolio" class="btn btn-light me-3 px-4 py-2">View My Work</a>
+                        <a href="#contact" class="btn btn-outline-light px-4 py-2">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <img src="https://placehold.co/400x400" alt="Profile" class="img-fluid floating" style="border-radius: 50%; border: 5px solid white;">
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow">
-          <img src="https://picsum.photos/400/302" class="card-img-top" alt="Project 3">
-          <div class="card-body">
-            <h5 class="card-title">Project Three</h5>
-            <p class="card-text">Some information about this project.</p>
-            <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
-          </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title center">About Me</h2>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="about-img">
+                        <img src="https://placehold.co/500x600" alt="About" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <h3 class="mb-3">A dedicated developer with a passion for creating</h3>
+                    <p class="mb-4">Hello! I'm a web developer and designer with over 5 years of experience specializing in building exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>Name:</strong> Your Name</li>
+                                <li class="mb-2"><strong>Email:</strong> your.email@example.com</li>
+                                <li class="mb-2"><strong>Age:</strong> 28</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>From:</strong> New York, USA</li>
+                                <li class="mb-2"><strong>Freelance:</strong> Available</li>
+                                <li class="mb-2"><strong>Phone:</strong> +1 234 567 8900</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="skills mt-5">
+                        <h4 class="mb-3">Skills</h4>
+                        <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <h6>Web Design</h6>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%" style="background: var(--primary); width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <h6>JavaScript</h6>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%" style="background: var(--accent2); width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="d-flex justify-content-between">
+                                <h6>UI/UX Design</h6>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%" style="background: var(--accent1); width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Contact -->
-<section id="contact" class="py-5">
-  <div class="container text-center">
-    <h2 class="fw-bold mb-4">Get In Touch</h2>
-    <p class="mb-4">I’d love to hear from you! Whether it’s a project, job opportunity, or just a chat.</p>
-    <a href="mailto:yourname@email.com" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Email Me</a>
-  </div>
-</section>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title center">My Portfolio</h2>
+                    <p class="lead mb-5">Here are some of my recent works</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/400x300" alt="Project 1" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-center">
+                                <h4 class="text-white">E-commerce Website</h4>
+                                <p class="text-white">Web Design</p>
+                                <a href="#" class="btn btn-light mt-2">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/400x300" alt="Project 2" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-center">
+                                <h4 class="text-white">Mobile App UI</h4>
+                                <p class="text-white">UI/UX Design</p>
+                                <a href="#" class="btn btn-light mt-2">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/400x300" alt="Project 3" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-center">
+                                <h4 class="text-white">Dashboard Design</h4>
+                                <p class="text-white">Web Development</p>
+                                <a href="#" class="btn btn-light mt-2">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/400x300" alt="Project 4" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-center">
+                                <h4 class="text-white">Brand Identity</h4>
+                                <p class="text-white">Branding</p>
+                                <a href="#" class="btn btn-light mt-2">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/400x300" alt="Project 5" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-center">
+                                <h4 class="text-white">Blog Platform</h4>
+                                <p class="text-white">Web Development</p>
+                                <a href="#" class="btn btn-light mt-2">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/400x300" alt="Project 6" class="img-fluid portfolio-img">
+                        <div class="portfolio-overlay">
+                            <div class="text-center">
+                                <h4 class="text-white">Restaurant Website</h4>
+                                <p class="text-white">Web Design</p>
+                                <a href="#" class="btn btn-light mt-2">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Footer -->
-<footer class="text-center">
-  <p>© 2025 John Doe | Made with ❤️ using Bootstrap</p>
-  <div>
-    <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
-    <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
-    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-  </div>
-</footer>
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title center">My Services</h2>
+                    <p class="lead mb-5">What I can do for you</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4>Web Development</h4>
+                        <p>I build responsive, modern websites and web applications using the latest technologies and best practices.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>UI/UX Design</h4>
+                        <p>I design intuitive and beautiful user interfaces that provide exceptional user experiences across all devices.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Responsive Design</h4>
+                        <p>I create websites that work perfectly on all devices, from desktops to tablets and smartphones.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>SEO Optimization</h4>
+                        <p>I optimize websites to rank higher in search engines, driving more organic traffic to your business.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                        <h4>Content Creation</h4>
+                        <p>I create engaging and relevant content that resonates with your target audience and drives conversions.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Digital Marketing</h4>
+                        <p>I develop and implement digital marketing strategies to help businesses grow their online presence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title center">Get In Touch</h2>
+                    <p class="lead mb-5">I'd love to hear from you</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <form class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Subject">
+                        <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+                    </form>
+                </div>
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <div class="contact-info">
+                        <h3 class="text-white mb-4">Contact Info</h3>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white mb-0">Location</h5>
+                                <p>New York, USA</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white mb-0">Email</h5>
+                                <p>your.email@example.com</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white mb-0">Phone</h5>
+                                <p>+1 234 567 8900</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="text-white mb-4">YourName</h3>
+                    <p class="mb-4">Creating beautiful and functional digital experiences</p>
+                    <div class="mb-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                    <p>&copy; 2023 YourName. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Navbar background on scroll
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                navbar.style.backgroundColor = 'var(--dark)';
+                navbar.style.padding = '0.5rem 2rem';
+            } else {
+                navbar.style.backgroundColor = 'rgba(45, 43, 85, 0.9)';
+                navbar.style.padding = '1rem 2rem';
+            }
+        });
+        
+        // Animate skill bars on scroll
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        function animateSkillBars() {
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                if (isElementInViewport(bar)) {
+                    bar.style.width = width;
+                }
+            });
+        }
+        
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        window.addEventListener('scroll', animateSkillBars);
+        
+        // Create particles in hero section
+        const particlesContainer = document.getElementById('particles');
+        const colors = ['#6c63ff', '#ff6584', '#42e2b8', '#2c8cff', '#ffb347'];
+        
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 20 + 5;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.background = color;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.left = `${Math.random() * 100}%`;
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize animation on page load
+        window.addEventListener('load', () => {
+            animateSkillBars();
+        });
+    </script>
 </body>
 </html>
